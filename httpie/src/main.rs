@@ -66,7 +66,7 @@ fn parse_url(s: &str) -> Result<String> {
     #[warn(unused_variables)]
     let _url: Url = s.parse()?;
 
-//     Ok(s.into())
+    // Ok(s.into())
     Ok(s.to_string())
 }
 
@@ -121,7 +121,6 @@ fn print_body(m: Option<Mime>, body: &String) {
             println!("{}", jsonxf::pretty_print(body).unwrap().cyan())
         }
         _ => println!("{}", body),
-
     }
 }
 
@@ -131,8 +130,8 @@ async fn main() -> Result<()> {
     let opt: Opts = Opts::parse();
 
     let mut headers = header::HeaderMap::new();
-    headers.insert("X-POWERED-BY", "Rust".parse().unwrap());
-    headers.insert(header::USER_AGENT, "Rust Httpie".parse().unwrap());
+    headers.insert("X-POWERED-BY", "Rust".parse()?);
+    headers.insert(header::USER_AGENT, "Rust Httpie".parse()?);
     let client = reqwest::Client::builder()
         .default_headers(headers)
         .build()?;
